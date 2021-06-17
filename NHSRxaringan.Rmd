@@ -490,9 +490,9 @@ git push --set-upstream origin master
 
 > https://vrbiki.github.io/learning-xaringan/
 
-* But to view it, change it by adding the path to the end of the above:
+* But to view it, change it by adding the path to the end of the above: 
 
 > https://vrbiki.github.io/learning-xaringan/NHSRxaringan.html
   
- * An alternative to the above is using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R:
+ * An alternative to the above is using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R by Jenny Bryan et al.
 
