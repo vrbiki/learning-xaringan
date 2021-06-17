@@ -473,9 +473,23 @@ One method of sharing your slides is to deploy them through GitHub pages. Here's
 4. Connect local repo to git hub repo:
 ```
 git init
+git add .
+git commit -m "Initial commit"
 git remote add origin https://github.com/username/repo-name.git
 git push --set-upstream origin master
 ```
+
+---
+
+# Missing CSS
+
+Note that if you only add the hmtl and Rmd file (i.e css files missing) the slides will not be formated properly.
+
+<img src="img/bad.png" width="47%"/>
+<img src="img/good.png" width="47%"/>
+
+---
+
 5. Enable GitHub pages:
   - Go to the Github repo
   - Click on the Settings tab

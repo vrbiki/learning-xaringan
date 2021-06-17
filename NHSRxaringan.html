@@ -326,7 +326,7 @@ background-size: 8%, cover
 # Icons
 
 * Who doesn't love an emoji? Download Hadley Wickhams `emo` package [here](https://github.com/hadley/emo)
-  - ` r emo::ji("face")` =  😂 `\(^{1}\)`
+  - ` r emo::ji("face")` =  😄 `\(^{1}\)`
   - ` r emo::ji("poop")` = 💩
 
 .footnote[ _no math in footnotes?_ `\(^{1}\)` the above inline R code was not rendered because I added a space in between the backtick and the r.]  
@@ -468,9 +468,23 @@ One method of sharing your slides is to deploy them through GitHub pages. Here's
 4. Connect local repo to git hub repo:
 ```
 git init
+git add .
+git commit -m "Initial commit"
 git remote add origin https://github.com/username/repo-name.git
 git push --set-upstream origin master
 ```
+
+---
+
+# Missing CSS
+
+Note that if you only add the hmtl and Rmd file (i.e css files missing) the slides will not be formated properly.
+
+&lt;img src="img/bad.png" width="47%"/&gt;
+&lt;img src="img/good.png" width="47%"/&gt;
+
+---
+
 5. Enable GitHub pages:
   - Go to the Github repo
   - Click on the Settings tab
