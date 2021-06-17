@@ -3,7 +3,6 @@
   <head>
     <title>Learning xaringan Presentations</title>
     <meta charset="utf-8" />
-    <meta name="author" content="not me" />
     <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
@@ -20,7 +19,7 @@ class: title-slide, left, bottom
 # Learning xaringan Presentations
 ----
 ## **Using the NHS-R theme**
-### not me
+### 
 ### Presentation Date
 
 ---
@@ -327,7 +326,7 @@ background-size: 8%, cover
 # Icons
 
 * Who doesn't love an emoji? Download Hadley Wickhams `emo` package [here](https://github.com/hadley/emo)
-  - ` r emo::ji("face")` =  🦄 `\(^{1}\)`
+  - ` r emo::ji("face")` =  😎 `\(^{1}\)`
   - ` r emo::ji("poop")` = 💩
 
 .footnote[ _no math in footnotes?_ `\(^{1}\)` the above inline R code was not rendered because I added a space in between the backtick and the r.]  
@@ -457,46 +456,40 @@ y &lt;- 10
 One method of sharing your slides is to deploy them through GitHub pages. Here's how to do it:
 1. Ensure your slides are contained within an R project. To [create a new R project from existing files](https://community.rstudio.com/t/creating-a-new-rproject-from-already-saved-files-rmd-md-scripts/14455) select the directory that contains your (isolated) files using:  `File` &gt; `New Project` &gt; `Existing Directory` 
 
-2. Create a new GitHub (Public) repo *without* initializing.
+2. Create a new GitHub (Public) repo *without* initializing. (I think we probably could have initialized with a readme)
 
 3.  Make the R project a Git repo by following the instructions in [Ch 17.2](https://happygitwithr.com/existing-github-last.html#make-or-verify-a-git-repo) of  [Happy Git with R](https://happygitwithr.com/):
-  - Use the call `usethis::use_git()` (which requires the *usethis* package)
-  - In RStudio, go to  `Tools` &gt; `Project Options` ...&gt; `Git/SVN`.
-  Under _Version control system_, select _Git_. Answer "Yes" to "Confirm New Git Repository?"
-  - Open Terminal and type `git init` from within in Project's directory.
-  - Restart RStudio you should now have a Git pane.
-  
+  &lt;!-- - Use the call `usethis::use_git()` (which requires the *usethis* package) --&gt;
+  &lt;!-- - In RStudio, go to  `Tools` &gt; `Project Options` ...&gt; `Git/SVN`. --&gt;
+  &lt;!-- Under _Version control system_, select _Git_. Answer "Yes" to "Confirm New Git Repository?" --&gt;
+  &lt;!-- - Open Terminal and type `git init` from within in Project's directory. --&gt;
+  &lt;!-- - Restart RStudio you should now have a Git pane. --&gt;
 
+4. Connect local repo to git hub repo:
+```
+git init
+git remote add origin https://github.com/username/repo-name.git
+git push --set-upstream origin master
+```
+5. Enable GitHub pages:
+  - Go to the Github repo
+  - Click on the Settings tab
+  - Scroll down to where it says: *Source* _GitHub Pages is currently disabled. Select a source below to enable GitHub Pages for this repository_ and Toggle from "None" to "master"
+  - Click save. Now your link is ready to share!
+  
 ---
 
-Using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R:
+* You have to tweak your url.  
 
-1. Create a git repo and initialize it with a readme file.  Copy the link. eg `https://github.com/username/repo-name.git.`
+* For instance, mine slides are housed here:
 
-2. Create a new project using Git clone
-  - `File` &gt; `New Project` &gt; `Version Control` &gt; `Git`. 
-  Past the link from step 1. in the "repository URL"
+&gt; https://vrbiki.github.io/learning-xaringan/
 
-3. "Stage", "Commit", and "Push" to Github
-  - Navigate to the "Git" tab (usually located in the upper right panel)
-  - Select the files you wish to "stage" for commit (this could be all files, or perhaps just the Rmd and html `\(^1\)` file) 
-  - "Commit" your changes by pressing the commit button and providing a comment (this should provide a short commentary on the changes you have made and why)
+* But to view it, change it by adding the path to the end of the above:
+
+&gt; https://vrbiki.github.io/learning-xaringan/NHSRxaringan.html
   
-.footnote[1. If you do not see an html file, that means you still need to Knit your presentation]
-
----
-
-We cannot push these changes yet since RStudio has not been given the destination. We need to specify it.
-
-4. Open Terminal (shell) and ensure you are in the directory of your project:
-```
-pwd
-```
-Use the following:
-```
-
-```
-
+ * An alternative to the above is using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R:
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
