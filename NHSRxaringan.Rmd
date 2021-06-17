@@ -1,0 +1,504 @@
+---
+title: "Learning xaringan Presentations"
+subtitle: "Using the NHS-R theme"
+author: "not me"
+institute: "NHS Organisation"
+date: "Presentation Date"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/nhsr.css
+      - css/nhsr-fonts.css
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      highlightLanguage: ["r"]
+      countIncrementalSlides: false
+      ratio: "16:9"
+    includes:
+      after_body: [css/insert-logo.html]
+---
+
+```{r setup, include = FALSE}
+
+# load packages
+library(knitr)
+library(tidyverse)
+library(nhsrtheme)
+library(icons)
+library(fontawesome)
+
+# set default options
+opts_chunk$set(echo = FALSE,
+               fig.width = 7.252,
+               fig.height = 4,
+               dpi = 300)
+
+# uncomment the following lines if you want to use the NHS-R theme colours by default
+# scale_fill_continuous <- partial(scale_fill_nhs, discrete = FALSE)
+# scale_fill_discrete <- partial(scale_fill_nhs, discrete = TRUE)
+# scale_colour_continuous <- partial(scale_colour_nhs, discrete = FALSE)
+# scale_colour_discrete <- partial(scale_colour_nhs, discrete = TRUE)
+```
+
+class: title-slide, left, bottom
+
+# `r rmarkdown::metadata$title`
+----
+## **`r rmarkdown::metadata$subtitle`**
+### `r rmarkdown::metadata$author`
+### `r rmarkdown::metadata$date`
+
+---
+class: inverse, middle, center
+
+# An inverse slide
+
+Often used for transitions
+
+---
+
+# Where did I pull this from:
+
+--
+
+* These slides are created using the package [xaringan](https://github.com/yihui/xaringan)
+  - Documentation in slide form can be found [here](https://slides.yihui.org/xaringan/#1) 
+  - Documentation in book form can be found in Chapter 7 of the [RMarkdown book](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+* This is using the NHS-R theme. Other xaringan themes can be seen [here](https://github.com/yihui/xaringan/wiki/Themes)  
+  - Visit the website [here](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html)
+  - At the above link, they provide a two-day intro to xaringan using their template:
+     * Day 1 slides and video
+     * Day 2 slides and video
+
+* I will be working through these and summarizing what I've learned here.
+
+---
+
+# The Rmd file
+
+* To begin, start a new RProject (this will make life easier if you want to deploy your slides to github). If you forget to do this, you can always follow the steps [here](https://community.rstudio.com/t/creating-a-new-rproject-from-already-saved-files-rmd-md-scripts/14455)
+
+* Next create a presentation from a template using:
+> `File -> New File -> R Markdown -> From Template -> <`_name of template_`>`.
+
+* This will create a R markdown file that begins with a YAML containing some meta data 
+
+* You can convert your `.Rmd` file to `html` slides by either:
+1. _knitting_ the document by clicking the ![](img/knit.png) button or on your keyboard using or `Shift` + `Command` + `K`
+2. using the moon reader addin. (Go to the `Addins` dropdown menu at the top of the RStudio window and select `Infinite Moon Reader`) 
+
+* I prefer to use the second option since it allows you to view the slides in the Viewer panel (i.e. within the RStudio window as opposed to a separate pop-up window) and it automatically generates the slides as you type! (i.e. bypassing the need to knit to see your changes)
+
+* Your Rmd file will begin with a YAML, followed by an R setup chunk.
+
+
+---
+
+# YAML
+
+My YAML looks like this.  You can change the meta data to what is appropriate.
+
+```yaml
+---
+title: "Xaringan Slides"
+subtitle: "Using the NHS-R theme"
+author: "not me"
+institute: "NHS Organisation"
+date: "Presentation Date"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/nhsr.css
+      - css/nhsr-fonts.css
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      highlightLanguage: ["r"]
+      countIncrementalSlides: false
+      ratio: "16:9"
+    includes:
+      after_body: [css/insert-logo.html]
+---
+```
+
+---
+
+# Slides
+
+* Notice that slide content starts immediately after the YAML (i.e it will be missing the `---` in this case)
+
+--
+
+* The first slide was a title page that was population using the meta-data from our YAML
+ - eg `rmarkdown::metadata$title` gives our title: "`r rmarkdown::metadata$title`"
+ - `----` created a horizontal line
+
+--
+
+* A new slide begins with  `---`,  pauses created using `--`. N.B, you can't use this within `.pull-left`/`.pull-right`.
+
+--
+
+* Presenter notes can be created using `???`
+
+* This will only be viewable to the presenter in presenter mode
+  - presenter mode can be accessed by pressing `p` (press `p` to exit)
+  - presenter notes also support markdown
+  - the notes should
+  - `h` will show you a help menu of useful keyboard shortcuts (again press `h` to exit)
+  - for example presenter notes might look like this:
+
+```
+???
+
+Only i can see this in presenter mode. **Remember** to _smile_! 
+```
+
+???
+
+Can you see this?
+_no you can't_
+** but i can ** 
+
+
+---
+
+# Alignment 
+* Classes:
+  - `title-slide` for titles
+  - `inverse` for dark background, light font
+
+--
+
+* Alignment:
+  - Vertical alignment: `left`, `middle`, `right`
+  - Horizontal alignment: `bottom`, `center`, `top`, 
+
+* You can align certain text using:
+  - for example `.right[`_text goes here_`]`  .right[text goes here]
+  
+  
+
+---
+
+class: top, left
+# top _left_ Alignment 
+
+---
+
+class: top, center
+# top _center_ Alignment 
+
+---
+
+class: top, right
+# top _right_ Alignment 
+
+---
+
+class: middle, left
+# Middle _Left_ Alignment 
+
+---
+
+class: middle, center
+# Middle _Center_ Alignment 
+
+---
+
+class: middle, right
+# Middle _Right_ Alignment 
+
+---
+
+class: bottom, left
+# Bottom _Left_ Alignment 
+
+---
+
+class: bottom, center
+# Bottom _Center_ Alignment 
+
+---
+
+class: bottom, right
+# Bottom _Right_ Alignment 
+
+---
+
+# Placement 
+
+You can layout content to the left or right use the syntax `.pull-left[]` and `.pull-right[]`, respectively.
+
+.pull-left[
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+]
+
+.pull-right[
+Enim neque volutpat ac tincidunt vitae semper quis lectus. Ipsum a arcu cursus vitae congue mauris rhoncus. Sed tempus urna et pharetra pharetra massa massa ultricies mi. Ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Tincidunt vitae semper quis lectus nulla. Vestibulum lorem sed risus ultricies tristique nulla. Eget gravida cum sociis natoque penatibus. Ipsum dolor sit amet consectetur adipiscing elit ut aliquam. A pellentesque sit amet porttitor eget dolor. Mi sit amet mauris commodo quis imperdiet massa tincidunt.
+
+Malesuada nunc vel risus commodo. Rutrum quisque non tellus orci ac auctor augue mauris augue. At consectetur lorem donec massa sapien faucibus et molestie ac. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Arcu bibendum at varius vel pharetra 
+
+]
+
+They don't have to take up the entire slide.  See how this can go back to taking up the entire width?
+
+---
+
+# columns within columns! 
+.pull-left[
+
+.pull-left[
+# Col 1
+this is a `.pull-left` within a `.pull-left`
+
+]
+
+.pull-right[
+# col 2
+this is a `.pull-right` within a `.pull-left`
+]
+
+]
+
+.pull-right[
+
+.pull-left[
+# Col 1
+this is a `.pull-left` within a `.pull-right`
+]
+
+.pull-right[
+# col 2
+this is a `.pull-right` within a `.pull-right`
+]
+]
+
+
+###  How sweet it is to be columned by xargingan! (to be columned by xargingan) 
+
+Malesuada nunc vel risus commodo. Rutrum quisque non tellus orci ac auctor augue mauris augue. At consectetur lorem donec massa sapien faucibus et molestie ac. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Arcu bibendum at varius vel pharetra 
+
+
+
+---
+
+# xarigan columns 
+
+.left-column[
+## Left
+The left column is 20% slide-width and lighter colour. This panel is created using the syntax `.left-column`. ]
+
+.right-column[
+## Right
+The right column is 75% textwidth and uses regular font. Notice how the Left and Right columns are not aligned at the top.  This is intentional. I'm guessing this is because the left columns are meant for "Asides" or "Tips" or "Warnings", etc. like the things of that nature that appear in textbooks.
+]
+
+Note that unlike before these columns are meant to be used for the entire slide.  As you can see here, if I continue typing we have some weird functionality. For instance, the start of this paragraph gets pushed to the top of the side. Also, now that we have space for the text to run the entire width of the slide, it is not expanding to do so. .red[please avoid this functionality].
+
+* In case you wer wondering, the red text was created using `.red[]`
+
+
+---
+
+# Images
+
+* you can add images using Rmarkdown (scale depends on image size and it's not very customizable)
+
+> `![](img/this.png)`
+
+* Using knitr (options [here](https://www.rdocumentation.org/packages/knitr/versions/1.30/topics/include_graphics))
+
+```{r echo=TRUE, eval=FALSE}
+knitr::include_graphics("img/camera-green.jpg")
+```
+
+
+* Using HTML (syntax [here](https://www.w3schools.com/html/html_images.asp))
+
+```{r echo=TRUE, eval=FALSE}
+<img src="img/camera-green.jpg" width="90%"/>
+```
+
+.footnote[Some sites for free images include: [upsplash.com](upsplash.com),[rawpixel.com](rawpixel.com), [https://www.pexels.com/](https://www.pexels.com/). Ps footnotes are created using `.footnote[]`  ]
+
+
+---
+
+# Backgrounds
+
+* You can specify a background image (or multiple images) at the start of your slide.  For example:
+```
+class: title-slide, right, top
+background-image: url(img/pathToImage.png), url(www.linkToImage.com)
+background-position: 90% 75%, 75% 75%
+background-size: 8%, cover
+```
+
+* Options for `background-size` include:
+  - `cover` will cover the slide so that there is no white space (may cut tops/sides)
+  - `contain` fits to slide height-wise
+  
+* See [here](https://css-tricks.com/almanac/properties/b/background-position/) on how you can play around with background position.
+
+---
+
+# Icons
+
+* Who doesn't love an emoji? Download Hadley Wickhams `emo` package [here](https://github.com/hadley/emo)
+  - ` r emo::ji("face")` =  `r emo::ji("face")` $^{1}$
+  - ` r emo::ji("poop")` = `r emo::ji("poop")`
+
+.footnote[ _no math in footnotes?_ $^{1}$ the above inline R code was not rendered because I added a space in between the backtick and the r.]  
+
+You can also use [Font Awesome](https://fontawesome.com/) icons: 
+- Using HTML: `<i class="fas fa-brain"></i>` doesn't work for me and neither does 
+- Using the `icons` [library](https://github.com/mitchelloharawild/icons)
+  + `icons::fontawesome("rocket", style = "solid")` = `r icons::fontawesome("rocket", style = "solid")` 
+  + `icons::fontawesome$solid$rocket` = `r icons::fontawesome$solid$rocket`
+  -   ` r icons::fontawesome("orcid")` = `r icons::fontawesome("orcid")`
+
+- Using `fa()` from the `fontawesome` package:
+  -  ` r fa("r-project", fill = "steelblue")` =  `r fa("r-project", fill = "steelblue")`
+  
+  
+---
+class: inverse, middle, center
+
+# R content (tables and plots)
+
+
+---
+
+Of course you could display tables in an R chunk 
+```{r}
+head(iris)
+```
+Or using `kable` from the **knitr** package. You can specify several features including:
+- `format`: `pipe` (default), `latex`, `simple`, `html`, `rst`
+  - `pipe` and `simple` are the most portable.
+- `align`:  `l` (left), `c` (center), and `r` (right) 
+  - either vector (eg. `c('l', 'c', )`) or single string (eg. `'lc'`)
+---
+```{r  echo=TRUE}
+kable(head(iris), format = "pipe", # this is the default
+ digits = getOption("digits"), row.names = NA, align = 'lrcr',
+  col.names = gsub("[.]", " ", names(iris)),  caption = "kable Table")
+```
+
+---
+# Interactive Slides
+
+This is an interactive table but didn't work in this presentation for some reason
+```{r  echo=TRUE, eval=FALSE}
+library(DT)
+kable(DT::datatable(iris))
+```
+Interactive plots can be created using the  **leaflet** package.  
+
+.red[For the time being you can **not** embed shiny apps within xaringan slides]
+
+Look out for xaringan "widgets" that are still under development. 
+
+
+---
+## This is cool and probably really useful for class:
+.pull-left[
+### Code
+
+----
+
+```{r irisplot, echo=TRUE, fig.show='hide'}
+plot(iris[,1:2], 
+     col=iris$Species, 
+     pch=as.numeric(iris$Species)+17)
+```
+The plot created on the right hand side did *NOT* repeat the code above.  Rather it referenced the code chunk by name:
+- Chunk 1: 
+ 
+ `{r irisplot, echo=TRUE, fig.show='hide'}`
+ 
+- Chunk 2:
+ 
+ `{r, ref.label="irisplot", echo=TRUE}`
+ 
+]
+
+.pull-right[
+
+### Plot
+
+----
+
+
+```{r, ref.label="irisplot", fig.height=6}
+```
+
+]
+
+---
+class: middle
+# Code highlighting
+
+if you want to draw attention to some particular line of code you can use highlight in gray by proceeding the line of code with `#<<`.  For example, in the R chunk, line 3 actually is written as `z = x + y #<< `
+```{r echo=TRUE}
+x <- 4
+y <- 10
+z = x + y #<<
+```
+
+---
+# Diployment of Slides
+
+One method of sharing your slides is to deploy them through GitHub pages. Here's how to do it:
+1. Ensure your slides are contained within an R project. To [create a new R project from existing files](https://community.rstudio.com/t/creating-a-new-rproject-from-already-saved-files-rmd-md-scripts/14455) select the directory that contains your (isolated) files using:  `File` > `New Project` > `Existing Directory` 
+
+2. Create a new GitHub (Public) repo *without* initializing.
+
+3.  Make the R project a Git repo by following the instructions in [Ch 17.2](https://happygitwithr.com/existing-github-last.html#make-or-verify-a-git-repo) of  [Happy Git with R](https://happygitwithr.com/):
+  - Use the call `usethis::use_git()` (which requires the *usethis* package)
+  - In RStudio, go to  `Tools` > `Project Options` ...> `Git/SVN`.
+  Under _Version control system_, select _Git_. Answer "Yes" to "Confirm New Git Repository?"
+  - Open Terminal and type `git init` from within in Project's directory.
+  - Restart RStudio you should now have a Git pane.
+  
+
+---
+
+Using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R:
+
+1. Create a git repo and initialize it with a readme file.  Copy the link. eg `https://github.com/username/repo-name.git.`
+
+2. Create a new project using Git clone
+  - `File` > `New Project` > `Version Control` > `Git`. 
+  Past the link from step 1. in the "repository URL"
+
+3. "Stage", "Commit", and "Push" to Github
+  - Navigate to the "Git" tab (usually located in the upper right panel)
+  - Select the files you wish to "stage" for commit (this could be all files, or perhaps just the Rmd and html $^1$ file) 
+  - "Commit" your changes by pressing the commit button and providing a comment (this should provide a short commentary on the changes you have made and why)
+  
+.footnote[1. If you do not see an html file, that means you still need to Knit your presentation]
+
+---
+
+We cannot push these changes yet since RStudio has not been given the destination. We need to specify it.
+
+4. Open Terminal (shell) and ensure you are in the directory of your project:
+```
+pwd
+```
+Use the following:
+```
+
+```
+
+

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Learning xaringan Presentations</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="not me" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: title-slide, left, bottom
+
+# Learning xaringan Presentations
+----
+## **Using the NHS-R theme**
+### not me
+### Presentation Date
+
+---
+class: inverse, middle, center
+
+# An inverse slide
+
+Often used for transitions
+
+---
+
+# Where did I pull this from:
+
+--
+
+* These slides are created using the package [xaringan](https://github.com/yihui/xaringan)
+  - Documentation in slide form can be found [here](https://slides.yihui.org/xaringan/#1) 
+  - Documentation in book form can be found in Chapter 7 of the [RMarkdown book](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+* This is using the NHS-R theme. Other xaringan themes can be seen [here](https://github.com/yihui/xaringan/wiki/Themes)  
+  - Visit the website [here](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html)
+  - At the above link, they provide a two-day intro to xaringan using their template:
+     * Day 1 slides and video
+     * Day 2 slides and video
+
+* I will be working through these and summarizing what I've learned here.
+
+---
+
+# The Rmd file
+
+* To begin, start a new RProject (this will make life easier if you want to deploy your slides to github). If you forget to do this, you can always follow the steps [here](https://community.rstudio.com/t/creating-a-new-rproject-from-already-saved-files-rmd-md-scripts/14455)
+
+* Next create a presentation from a template using:
+&gt; `File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; &lt;`_name of template_`&gt;`.
+
+* This will create a R markdown file that begins with a YAML containing some meta data 
+
+* You can convert your `.Rmd` file to `html` slides by either:
+1. _knitting_ the document by clicking the ![](img/knit.png) button or on your keyboard using or `Shift` + `Command` + `K`
+2. using the moon reader addin. (Go to the `Addins` dropdown menu at the top of the RStudio window and select `Infinite Moon Reader`) 
+
+* I prefer to use the second option since it allows you to view the slides in the Viewer panel (i.e. within the RStudio window as opposed to a separate pop-up window) and it automatically generates the slides as you type! (i.e. bypassing the need to knit to see your changes)
+
+* Your Rmd file will begin with a YAML, followed by an R setup chunk.
+
+
+---
+
+# YAML
+
+My YAML looks like this.  You can change the meta data to what is appropriate.
+
+```yaml
+---
+title: "Xaringan Slides"
+subtitle: "Using the NHS-R theme"
+author: "not me"
+institute: "NHS Organisation"
+date: "Presentation Date"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/nhsr.css
+      - css/nhsr-fonts.css
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      highlightLanguage: ["r"]
+      countIncrementalSlides: false
+      ratio: "16:9"
+    includes:
+      after_body: [css/insert-logo.html]
+---
+```
+
+---
+
+# Slides
+
+* Notice that slide content starts immediately after the YAML (i.e it will be missing the `---` in this case)
+
+--
+
+* The first slide was a title page that was population using the meta-data from our YAML
+ - eg `rmarkdown::metadata$title` gives our title: "Learning xaringan Presentations"
+ - `----` created a horizontal line
+
+--
+
+* A new slide begins with  `---`,  pauses created using `--`. N.B, you can't use this within `.pull-left`/`.pull-right`.
+
+--
+
+* Presenter notes can be created using `???`
+
+* This will only be viewable to the presenter in presenter mode
+  - presenter mode can be accessed by pressing `p` (press `p` to exit)
+  - presenter notes also support markdown
+  - the notes should
+  - `h` will show you a help menu of useful keyboard shortcuts (again press `h` to exit)
+  - for example presenter notes might look like this:
+
+```
+???
+
+Only i can see this in presenter mode. **Remember** to _smile_! 
+```
+
+???
+
+Can you see this?
+_no you can't_
+** but i can ** 
+
+
+---
+
+# Alignment 
+* Classes:
+  - `title-slide` for titles
+  - `inverse` for dark background, light font
+
+--
+
+* Alignment:
+  - Vertical alignment: `left`, `middle`, `right`
+  - Horizontal alignment: `bottom`, `center`, `top`, 
+
+* You can align certain text using:
+  - for example `.right[`_text goes here_`]`  .right[text goes here]
+  
+  
+
+---
+
+class: top, left
+# top _left_ Alignment 
+
+---
+
+class: top, center
+# top _center_ Alignment 
+
+---
+
+class: top, right
+# top _right_ Alignment 
+
+---
+
+class: middle, left
+# Middle _Left_ Alignment 
+
+---
+
+class: middle, center
+# Middle _Center_ Alignment 
+
+---
+
+class: middle, right
+# Middle _Right_ Alignment 
+
+---
+
+class: bottom, left
+# Bottom _Left_ Alignment 
+
+---
+
+class: bottom, center
+# Bottom _Center_ Alignment 
+
+---
+
+class: bottom, right
+# Bottom _Right_ Alignment 
+
+---
+
+# Placement 
+
+You can layout content to the left or right use the syntax `.pull-left[]` and `.pull-right[]`, respectively.
+
+.pull-left[
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+]
+
+.pull-right[
+Enim neque volutpat ac tincidunt vitae semper quis lectus. Ipsum a arcu cursus vitae congue mauris rhoncus. Sed tempus urna et pharetra pharetra massa massa ultricies mi. Ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Tincidunt vitae semper quis lectus nulla. Vestibulum lorem sed risus ultricies tristique nulla. Eget gravida cum sociis natoque penatibus. Ipsum dolor sit amet consectetur adipiscing elit ut aliquam. A pellentesque sit amet porttitor eget dolor. Mi sit amet mauris commodo quis imperdiet massa tincidunt.
+
+Malesuada nunc vel risus commodo. Rutrum quisque non tellus orci ac auctor augue mauris augue. At consectetur lorem donec massa sapien faucibus et molestie ac. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Arcu bibendum at varius vel pharetra 
+
+]
+
+They don't have to take up the entire slide.  See how this can go back to taking up the entire width?
+
+---
+
+# columns within columns! 
+.pull-left[
+
+.pull-left[
+# Col 1
+this is a `.pull-left` within a `.pull-left`
+
+]
+
+.pull-right[
+# col 2
+this is a `.pull-right` within a `.pull-left`
+]
+
+]
+
+.pull-right[
+
+.pull-left[
+# Col 1
+this is a `.pull-left` within a `.pull-right`
+]
+
+.pull-right[
+# col 2
+this is a `.pull-right` within a `.pull-right`
+]
+]
+
+
+###  How sweet it is to be columned by xargingan! (to be columned by xargingan) 
+
+Malesuada nunc vel risus commodo. Rutrum quisque non tellus orci ac auctor augue mauris augue. At consectetur lorem donec massa sapien faucibus et molestie ac. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Arcu bibendum at varius vel pharetra 
+
+
+
+---
+
+# xarigan columns 
+
+.left-column[
+## Left
+The left column is 20% slide-width and lighter colour. This panel is created using the syntax `.left-column`. ]
+
+.right-column[
+## Right
+The right column is 75% textwidth and uses regular font. Notice how the Left and Right columns are not aligned at the top.  This is intentional. I'm guessing this is because the left columns are meant for "Asides" or "Tips" or "Warnings", etc. like the things of that nature that appear in textbooks.
+]
+
+Note that unlike before these columns are meant to be used for the entire slide.  As you can see here, if I continue typing we have some weird functionality. For instance, the start of this paragraph gets pushed to the top of the side. Also, now that we have space for the text to run the entire width of the slide, it is not expanding to do so. .red[please avoid this functionality].
+
+* In case you wer wondering, the red text was created using `.red[]`
+
+
+---
+
+# Images
+
+* you can add images using Rmarkdown (scale depends on image size and it's not very customizable)
+
+&gt; `![](img/this.png)`
+
+* Using knitr (options [here](https://www.rdocumentation.org/packages/knitr/versions/1.30/topics/include_graphics))
+
+
+```r
+knitr::include_graphics("img/camera-green.jpg")
+```
+
+
+* Using HTML (syntax [here](https://www.w3schools.com/html/html_images.asp))
+
+
+```r
+&lt;img src="img/camera-green.jpg" width="90%"/&gt;
+```
+
+.footnote[Some sites for free images include: [upsplash.com](upsplash.com),[rawpixel.com](rawpixel.com), [https://www.pexels.com/](https://www.pexels.com/). Ps footnotes are created using `.footnote[]`  ]
+
+
+---
+
+# Backgrounds
+
+* You can specify a background image (or multiple images) at the start of your slide.  For example:
+```
+class: title-slide, right, top
+background-image: url(img/pathToImage.png), url(www.linkToImage.com)
+background-position: 90% 75%, 75% 75%
+background-size: 8%, cover
+```
+
+* Options for `background-size` include:
+  - `cover` will cover the slide so that there is no white space (may cut tops/sides)
+  - `contain` fits to slide height-wise
+  
+* See [here](https://css-tricks.com/almanac/properties/b/background-position/) on how you can play around with background position.
+
+---
+
+# Icons
+
+* Who doesn't love an emoji? Download Hadley Wickhams `emo` package [here](https://github.com/hadley/emo)
+  - ` r emo::ji("face")` =  🦄 `\(^{1}\)`
+  - ` r emo::ji("poop")` = 💩
+
+.footnote[ _no math in footnotes?_ `\(^{1}\)` the above inline R code was not rendered because I added a space in between the backtick and the r.]  
+
+You can also use [Font Awesome](https://fontawesome.com/) icons: 
+- Using HTML: `&lt;i class="fas fa-brain"&gt;&lt;/i&gt;` doesn't work for me and neither does 
+- Using the `icons` [library](https://github.com/mitchelloharawild/icons)
+  + `icons::fontawesome("rocket", style = "solid")` = &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M505.12019,19.09375c-1.18945-5.53125-6.65819-11-12.207-12.1875C460.716,0,435.507,0,410.40747,0,307.17523,0,245.26909,55.20312,199.05238,128H94.83772c-16.34763.01562-35.55658,11.875-42.88664,26.48438L2.51562,253.29688A28.4,28.4,0,0,0,0,264a24.00867,24.00867,0,0,0,24.00582,24H127.81618l-22.47457,22.46875c-11.36521,11.36133-12.99607,32.25781,0,45.25L156.24582,406.625c11.15623,11.1875,32.15619,13.15625,45.27726,0l22.47457-22.46875V488a24.00867,24.00867,0,0,0,24.00581,24,28.55934,28.55934,0,0,0,10.707-2.51562l98.72834-49.39063c14.62888-7.29687,26.50776-26.5,26.50776-42.85937V312.79688c72.59753-46.3125,128.03493-108.40626,128.03493-211.09376C512.07526,76.5,512.07526,51.29688,505.12019,19.09375ZM384.04033,168A40,40,0,1,1,424.05,128,40.02322,40.02322,0,0,1,384.04033,168Z"&gt;&lt;/path&gt;&lt;/svg&gt; 
+  + `icons::fontawesome$solid$rocket` = &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M505.12019,19.09375c-1.18945-5.53125-6.65819-11-12.207-12.1875C460.716,0,435.507,0,410.40747,0,307.17523,0,245.26909,55.20312,199.05238,128H94.83772c-16.34763.01562-35.55658,11.875-42.88664,26.48438L2.51562,253.29688A28.4,28.4,0,0,0,0,264a24.00867,24.00867,0,0,0,24.00582,24H127.81618l-22.47457,22.46875c-11.36521,11.36133-12.99607,32.25781,0,45.25L156.24582,406.625c11.15623,11.1875,32.15619,13.15625,45.27726,0l22.47457-22.46875V488a24.00867,24.00867,0,0,0,24.00581,24,28.55934,28.55934,0,0,0,10.707-2.51562l98.72834-49.39063c14.62888-7.29687,26.50776-26.5,26.50776-42.85937V312.79688c72.59753-46.3125,128.03493-108.40626,128.03493-211.09376C512.07526,76.5,512.07526,51.29688,505.12019,19.09375ZM384.04033,168A40,40,0,1,1,424.05,128,40.02322,40.02322,0,0,1,384.04033,168Z"&gt;&lt;/path&gt;&lt;/svg&gt;
+  -   ` r icons::fontawesome("orcid")` = &lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"&gt;&lt;/path&gt;&lt;/svg&gt;
+
+- Using `fa()` from the `fontawesome` package:
+  -  ` r fa("r-project", fill = "steelblue")` =  <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>
+  
+  
+---
+class: inverse, middle, center
+
+# R content (tables and plots)
+
+
+---
+
+Of course you could display tables in an R chunk 
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+Or using `kable` from the **knitr** package. You can specify several features including:
+- `format`: `pipe` (default), `latex`, `simple`, `html`, `rst`
+  - `pipe` and `simple` are the most portable.
+- `align`:  `l` (left), `c` (center), and `r` (right) 
+  - either vector (eg. `c('l', 'c', )`) or single string (eg. `'lc'`)
+---
+
+```r
+kable(head(iris), format = "pipe", # this is the default
+ digits = getOption("digits"), row.names = NA, align = 'lrcr',
+  col.names = gsub("[.]", " ", names(iris)),  caption = "kable Table")
+```
+
+
+
+Table: kable Table
+
+|Sepal Length | Sepal Width| Petal Length | Petal Width|Species |
+|:------------|-----------:|:------------:|-----------:|:-------|
+|5.1          |         3.5|     1.4      |         0.2|setosa  |
+|4.9          |         3.0|     1.4      |         0.2|setosa  |
+|4.7          |         3.2|     1.3      |         0.2|setosa  |
+|4.6          |         3.1|     1.5      |         0.2|setosa  |
+|5.0          |         3.6|     1.4      |         0.2|setosa  |
+|5.4          |         3.9|     1.7      |         0.4|setosa  |
+
+---
+# Interactive Slides
+
+This is an interactive table but didn't work in this presentation for some reason
+
+```r
+library(DT)
+kable(DT::datatable(iris))
+```
+Interactive plots can be created using the  **leaflet** package.  
+
+.red[For the time being you can **not** embed shiny apps within xaringan slides]
+
+Look out for xaringan "widgets" that are still under development. 
+
+
+---
+## This is cool and probably really useful for class:
+.pull-left[
+### Code
+
+----
+
+
+```r
+plot(iris[,1:2], 
+     col=iris$Species, 
+     pch=as.numeric(iris$Species)+17)
+```
+The plot created on the right hand side did *NOT* repeat the code above.  Rather it referenced the code chunk by name:
+- Chunk 1: 
+ 
+ `{r irisplot, echo=TRUE, fig.show='hide'}`
+ 
+- Chunk 2:
+ 
+ `{r, ref.label="irisplot", echo=TRUE}`
+ 
+]
+
+.pull-right[
+
+### Plot
+
+----
+
+
+![](NHSRxaringan_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+]
+
+---
+class: middle
+# Code highlighting
+
+if you want to draw attention to some particular line of code you can use highlight in gray by proceeding the line of code with `#&lt;&lt;`.  For example, in the R chunk, line 3 actually is written as `z = x + y #&lt;&lt; `
+
+```r
+x &lt;- 4
+y &lt;- 10
+*z = x + y
+```
+
+---
+# Diployment of Slides
+
+One method of sharing your slides is to deploy them through GitHub pages. Here's how to do it:
+1. Ensure your slides are contained within an R project. To [create a new R project from existing files](https://community.rstudio.com/t/creating-a-new-rproject-from-already-saved-files-rmd-md-scripts/14455) select the directory that contains your (isolated) files using:  `File` &gt; `New Project` &gt; `Existing Directory` 
+
+2. Create a new GitHub (Public) repo *without* initializing.
+
+3.  Make the R project a Git repo by following the instructions in [Ch 17.2](https://happygitwithr.com/existing-github-last.html#make-or-verify-a-git-repo) of  [Happy Git with R](https://happygitwithr.com/):
+  - Use the call `usethis::use_git()` (which requires the *usethis* package)
+  - In RStudio, go to  `Tools` &gt; `Project Options` ...&gt; `Git/SVN`.
+  Under _Version control system_, select _Git_. Answer "Yes" to "Confirm New Git Repository?"
+  - Open Terminal and type `git init` from within in Project's directory.
+  - Restart RStudio you should now have a Git pane.
+  
+
+---
+
+Using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R:
+
+1. Create a git repo and initialize it with a readme file.  Copy the link. eg `https://github.com/username/repo-name.git.`
+
+2. Create a new project using Git clone
+  - `File` &gt; `New Project` &gt; `Version Control` &gt; `Git`. 
+  Past the link from step 1. in the "repository URL"
+
+3. "Stage", "Commit", and "Push" to Github
+  - Navigate to the "Git" tab (usually located in the upper right panel)
+  - Select the files you wish to "stage" for commit (this could be all files, or perhaps just the Rmd and html `\(^1\)` file) 
+  - "Commit" your changes by pressing the commit button and providing a comment (this should provide a short commentary on the changes you have made and why)
+  
+.footnote[1. If you do not see an html file, that means you still need to Knit your presentation]
+
+---
+
+We cannot push these changes yet since RStudio has not been given the destination. We need to specify it.
+
+4. Open Terminal (shell) and ensure you are in the directory of your project:
+```
+pwd
+```
+Use the following:
+```
+
+```
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "googlecode",
+"highlightLines": true,
+"highlightLanguage": "r",
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<!--Hat-tip: https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/-->
+<style>
+.logo {
+  background-image: url(img/logo-blue.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
