@@ -5,6 +5,10 @@
     <meta charset="utf-8" />
     <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
     <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
     <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
   </head>
@@ -326,7 +330,7 @@ background-size: 8%, cover
 # Icons
 
 * Who doesn't love an emoji? Download Hadley Wickhams `emo` package [here](https://github.com/hadley/emo)
-  - ` r emo::ji("face")` =  😄 `\(^{1}\)`
+  - ` r emo::ji("face")` =  😉 `\(^{1}\)`
   - ` r emo::ji("poop")` = 💩
 
 .footnote[ _no math in footnotes?_ `\(^{1}\)` the above inline R code was not rendered because I added a space in between the backtick and the r.]  
@@ -504,7 +508,432 @@ Note that if you only add the hmtl and Rmd file (i.e css files missing) the slid
 &gt; https://vrbiki.github.io/learning-xaringan/NHSRxaringan.html
   
  * An alternative to the above is using the copy and paste solution presented in [Ch 16](https://happygitwithr.com/existing-github-first.html) of Happy Git with R by Jenny Bryan et al.
+ 
+---
+class: inverse, middle, center
+ 
+ # How to zhuzh it up 
+ ## (Day 2 of [Sharing Your Work with xaringan](https://spcanelon.github.io/xaringan-basics-and-beyond/index.html))
+ 
+ 
+---
+# Overview mode
 
+- As we have seen before, xaringan offers some helpful keyboard shortcut `p` for presenter mode.
+
+- Another helpful shortcut is to press `o` to see an overview of the presentation which creates a thumbnail grid of presentation which you can easily scroll and navigate through.
+
+- To gain access to this feature you need to the run the following in your setup chunk
+
+```r
+library(xaringanExtra)
+xaringanExtra::use_tile_view()
+```
+
+- To use tabs in the slides (called "panel set"), put the following into your setup chunk
+
+```r
+xaringanExtra::use_panelset()
+```
+
+---
+# Panel set example
+
+.panelset[
+.panel[.panel-name[Tab 1]
+This is the first panel.  Note that you can use the same kind of stuff you used on regular slides...
+
+.pull-left[
+### Left 
+----
+Pull left for example
+- bullet points
+- figures (shown on the right)
+
+```r
+# some code
+x &lt;- 1
+x + 4
+```
+
+```
+## [1] 5
+```
+
+]
+.pull-right[
+### Right
+----
+
+![](img/good.png)
+
+
+]
+] &lt;!--  end of panel 1 --&gt;
+
+.panel[.panel-name[Tab 2]
+this is the second panel
+] &lt;!--  end of panel 2 --&gt;
+
+
+.panel[.panel-name[Tab 3]
+this is the third panel 
+
+.pull-left[
+### Left
+Note that you can use classes within classes.  For instance, you can use `pull-left` within a `.panel`. Cool huh?
+]
+.pull-right[
+### Right
+For completion lets put some stuff on the right so you can see how this looks
+]
+
+
+] &lt;!--  end of panel 3 --&gt;
+
+
+] &lt;!--  end of panel --&gt;
+
+
+---
+class: inverse, middle, center
+
+# Tweaking the CSS files
+
+---
+# CCS (Cascading styling sheet) 
+.footnote[ Check out [w3schools what is css](https://www.w3schools.com/whatis/whatis_css.asp)]
+
+* Inside the *lib* &gt; *remark-css* folder there is a file called `default.css` (CSS stands for cascading styling sheet)
+
+* This acts as a template for whats gets used in a standard xaringan styling sheet.
+
+* Styling rules are created using _selectors_.  
+
+* Each selector has one or more _properites_ that are assigned a value.
+
+The general structure is shown below (for more see [this complete guide to css functions](https://css-tricks.com/complete-guide-to-css-functions/))
+
+```
+.selector{
+     property: function("argument"); # &lt;-- declaration
+}
+```
+
+* For more on properties and selectors please visit [https://css-tricks.com/almanac/](https://css-tricks.com/almanac/)
+
+See more info on which css files are being used on the help page `?xaringan::moon_reader`
+---
+
+# Class selectors
+
+* _Class selectors_ begin with a period.  For example, the follow rule selects all level 1 headers (as denoted using `#`&lt;text&gt; in Rmd) and styles them blue with 12px font size.
+```
+h1 {color:blue; font-size:12px;}
+```
+More generically we might have:
+```
+selector {property:value; property2:value}
+```
+Another example, for `#&gt;&gt;` highlight code will appear in yellow in the default cs..
+```
+.remark-code-line-highlighted { background-color: #ffff88; }
+```
+In the NHSR css file, they change that so highlighted code has a gray background:
+```
+.remark-code-line-highlighted { background-color:   #E8EDEE;}
+```
+
+---
+More Class Selector examples:
+
+```
+/*-- CUSTOM CLASSES FOR TEXT EMPHASIS --*/
+.blue       { color:   #005EB8 }
+.green      { color:   #009639 }
+.pink       { color:   #AE2573 }
+.red        { color:   #DA291C }
+.warmyellow { color:   #FFB81C }
+```
+To use them within your Rmd file type, for example,
+```
+.pink[this is how you use them]
+```
+Which renders too...
+
+&gt; .pink[this is how you use them]
+
+You can make css styles direcly in your Rmd file in a code chunk! (just change the chunk from {r} to {css}. Eg, 
+.pull-left[
+```
+.fade { 
+  opacity: 0.5; 
+}
+```
+]
+
+.pull-right[
+&lt;style type="text/css"&gt;
+.fade { 
+  opacity: 0.5; 
+}
+&lt;/style&gt;
+```
+.fade[what does this do?]
+```
+&gt; .fade[what does this do?]
+]
+
+---
+
+# Colors and fonts.
+
+Some links for making colour palettes include:
+- [https://coolors.co/](https://coolors.co/) (see trending ones [https://coolors.co/palettes/trending](https://coolors.co/palettes/trending))
+- [https://mycolor.space/](https://mycolor.space/)
+- [https://www.color-hex.com/](https://www.color-hex.com/) (to look up hex codes)
+
+
+You can change your fonts in the font.css file.
+
+[https://fonts.google.com/](https://fonts.google.com/) to look up some fonts. Once you find a font you like from that site, click "+ Select this style" which ones a panel on the right. 
+- Select "@import".
+- Copy and paste the text between the `&lt;style&gt;` tags
+- paste it inside your font.css file
+
+
+
+---
+# Fonts
+
+Here is how the NHSR css file does it (in *css* folder. filename: *nhsr-fonts.css*)
+
+```
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&amp;display=swap');
+body { font-family: "Arial", "Frutiger", sans-serif; }
+h1, h2, h3 { font-family: "Frutiger", "Arial", sans-serif;}
+```
+Multiple fonts are used as backup. For example, in the header selectors, if the users do not have the font "Frutiger" than the user to instead see the headers in "Arial" font.
+
+(from [Ninja](https://slides.yihui.org/xaringan/#1) slides):
+- If you used Google fonts in slides they won't work offline unless you download or install them locally.  
+- The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
+- Seting the css option in the YAML metadata:
+
+```r
+output:
+  xaringan::moon_reader:
+    css: ["default", "ubuntu-mono.css"]
+```
+ assumes  `ubuntu-mono.css` is under the same directory as your Rmd.
+
+---
+# Themes 
+
+- A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name.
+
+- Below are some existing themes:
+
+```r
+names(xaringan:::list_css())
+```
+
+```
+##  [1] "chocolate-fonts"  "chocolate"        "default-fonts"    "default"         
+##  [5] "duke-blue"        "fc-fonts"         "fc"               "hygge-duke"      
+##  [9] "hygge"            "ki-fonts"         "ki"               "kunoichi"        
+## [13] "lucy-fonts"       "lucy"             "metropolis-fonts" "metropolis"      
+## [17] "middlebury-fonts" "middlebury"       "nhsr-fonts"       "nhsr"            
+## [21] "ninjutsu"         "rladies-fonts"    "rladies"          "robot-fonts"     
+## [25] "robot"            "rutgers-fonts"    "rutgers"          "shinobi"         
+## [29] "tamu-fonts"       "tamu"             "uio-fonts"        "uio"             
+## [33] "uo-fonts"         "uo"               "uol-fonts"        "uol"             
+## [37] "useR-fonts"       "useR"
+```
+
+.footnote[From Ninja slides]
+---
+# Themes
+
+To use a theme, you can specify the css option as an array of CSS filenames (without the .css extensions), e.g.,
+
+```r
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+```
+
+    
+.footnote[From Ninja slides]
+---
+# how do we specify which CSS to use
+
+In the YAML. If you go to the top of this Rmd file for example, you'll see:
+```
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/nhsr.css
+      - css/nhsr-fonts.css
+
+```
+---
+class: inverse, middle, center
+
+# Ninja Presentation
+##Information extracted from the [Ninja](https://slides.yihui.org/xaringan/#1) default slides
+
+---
+# Math Expressions
+
+Which latex syntax works, for example this inline expression `\(f(x) = {n \choose x} (p)^x (1-p)^{n-x}\)` or this "math mode" equations: $$ f(x) = {n \choose x} (p)^x (1-p)^{n-x} $$ you must make sure that:
+- inline Latex math code is restricted to one (rendered) line
+- math mode (which begins and ends with double dollar signs `$$`)
+- Apparently _the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;_ but I did not follow that rule above and it rendered just fine.
+
+---
+# Note
+
+- Shiny apps cannot (and should not?) be embedded in slide deck, i.e. the Shiny mode (`runtime: shiny`) does not work.  Yuiwei suggest launching them separately.
+
+- You can add a countdown timer to your slides. The following will display a timer beside the page number counting down from 01:00. Once it reaches 0:00 it will start counting up (but now, in red font).
+
+```r
+output:
+  xaringan::moon_reader:
+    nature:
+      countdown: 60000
+```
+
+* The following code will be highlight if `highlightLines: true`. 
+  - lines that start with `*`, (this option may cause errors if you actually have to run the code)
+  - lines wrapped in `{{ }}`
+  - lines trailing comments `#&lt;&lt;`
+
+```r
+output:
+  xaringan::moon_reader:
+    nature:
+      highlightLines: true
+```
+
+---
+# code output highlighting
+
+- To high light code *output* use, `highlight.output = true` in the code chunk.  
+- If you only want certain lines of output code to be highlighted use, for example, 
+`highlight.output = c(1, 3) `.  For example:
+
+```r
+head(iris, 4)
+```
+
+```
+*##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+*## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+```
+
+Cool trick for even/odd highlighting `highlight.output=c(TRUE, FALSE)`
+
+```
+*##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+*## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+*## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+*## 6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+---
+# Title Slides
+
+- Rather than adjusting the CSS file, you could adjust the title slide position of test in the YAML :
+
+```r
+output:
+  xaringan::moon_reader:
+    nature:
+      titleSlideClass: [top, left, inverse]
+```
+To disable the title side use:
+
+```r
+output:
+  xaringan::moon_reader:
+    seal: false
+```
+
+---
+# Tips
+
+- Slides will not work offline unless you have a local copy of *remark.js*
+
+- To get this run `xaringan::summon_remark()` and change the chakra in the YAML:
+
+```r
+output:
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js
+```
+(by default RStudio uses an online version)
+
+---
+# Macros
+
+- *remark.js* allows users to define custom macros (JS functions).
+
+- They can be applied to Markdown text using either
+&gt; `![:macroName arg1, arg2, ...]` or 
+&gt; `![:macroName arg1, arg2, ...](this)`
+
+- For example, before remark.js initializes the slides, you can define a macro named `scale`:
+```
+remark.macros.scale = function (percentage) {
+  var url = this;
+  return '&lt;img src="' + url + '" style="width: ' + percentage + '" /&gt;';
+};
+```
+.red[It is not clear to me where this goes (* nvm see next slide.)]
+Then the Markdown text
+```
+![:scale 50%](image.jpg)
+```
+will be translated to
+```
+&lt;img src="image.jpg" style="width: 50%" /&gt;
+```
+---
+# Macros (contd)
+
+
+- To insert macros in xaringan slides, you can use the option `beforeInit` under the option `nature`, e.g.,
+
+```r
+output:
+  xaringan::moon_reader:
+    nature:
+      beforeInit: "macros.js"
+```
+
+You save your remark.js macros in the file `macros.js`.
+
+- The `beforeInit` option can be used to insert arbitrary JS code before `remark.create()`. Inserting macros is just one of its possible applications. .red[not sure what this means]
+
+
+# Quotes
+
+
+
+&gt; "If it weren't for my lawyer, I'd still be in prison.
+&gt;  It went a lot faster with two people digging."
+&gt;
+&gt; &lt;footer&gt;--- Joe Martin&lt;/footer&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -580,6 +1009,51 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
   }
 })();
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(60000);
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
